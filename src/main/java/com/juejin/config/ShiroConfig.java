@@ -78,9 +78,10 @@ public class ShiroConfig {
         factoryBean.setFilters(filters);
 
         Map<String, String> chain = new LinkedHashMap<>();
-        // 登录、注册无需认证
+        // 登录、注册、短信验证码无需认证
         chain.put("/api/auth/login", "anon");
         chain.put("/api/auth/register", "anon");
+        chain.put("/api/auth/sms/**", "anon");
         // 其余接口需要 JWT
         chain.put("/api/**", "jwt");
         chain.put("/**", "anon");

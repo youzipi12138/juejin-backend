@@ -59,6 +59,19 @@ app:
     # token 有效期（秒），同时作为 Redis 中 token 的 TTL
     expire-seconds: 86400
 
+  sms:
+    # 未接入第三方短信平台时使用模拟发送器
+    mock: ${SMS_MOCK:true}
+    # 仅 mock 模式下生效；生产环境必须设为 false，不要把验证码返回给调用方
+    expose-code: ${SMS_EXPOSE_CODE:true}
+    code-ttl: 5m
+    send-interval: 60s
+    max-attempts: 5
+    daily-limit-per-phone: 10
+    hourly-limit-per-ip: 30
+    # 验证码哈希密钥，生产环境务必替换
+    pepper: ${SMS_PEPPER:juejin-sms-pepper-change-me}
+
 logging:
   level:
     com.juejin: debug
