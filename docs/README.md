@@ -5,6 +5,7 @@
 | 2026-10-17 | [手机号验证码登录方案](./sms-login-design.md) | 手机号 + 验证码登录/自动注册、模拟短信、Redis 限流与一次性消费 |
 | 2026-10-17 | [基础认证与权限设计](./auth-design.md) | Spring Boot + Shiro + JWT + Redis 的登录与鉴权基础方案 |
 | 2026-10-17 | [Dev 环境 CI/CD 部署方案](./cicd-dev-deployment.md) | GitHub Actions + SSH + 服务器本地构建 + Docker Compose，已上线 175 服务器 |
+| 2026-10-17 | [iOS 前端接入 Dev 后端方案](./frontend-integration.md) | SwiftUI 客户端接入手机号验证码登录、JWT 持久化与会话恢复 |
 
 ## 约定
 

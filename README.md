@@ -17,6 +17,7 @@
 - [手机号验证码登录方案](docs/sms-login-design.md)
 - [基础认证与权限设计](docs/auth-design.md)
 - [Dev 环境 CI/CD 部署方案](docs/cicd-dev-deployment.md)
+- [iOS 前端接入 Dev 后端方案](docs/frontend-integration.md)
 
 ## 技术栈
 
