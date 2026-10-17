@@ -10,6 +10,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
@@ -44,6 +46,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result<Void>> handleAuthorizationException(AuthorizationException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(Result.fail(HttpStatus.FORBIDDEN.value(), "没有权限执行该操作"));
+    }
+
+    @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
+    public ResponseEntity<Result<Void>> handleNotFound(Exception e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Result.fail(HttpStatus.NOT_FOUND.value(), "接口不存在"));
     }
 
     @ExceptionHandler(Exception.class)
