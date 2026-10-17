@@ -4,6 +4,7 @@
 | --- | --- | --- |
 | 2026-10-17 | [手机号验证码登录方案](./sms-login-design.md) | 手机号 + 验证码登录/自动注册、模拟短信、Redis 限流与一次性消费 |
 | 2026-10-17 | [基础认证与权限设计](./auth-design.md) | Spring Boot + Shiro + JWT + Redis 的登录与鉴权基础方案 |
+| 2026-10-17 | [Dev 环境 CI/CD 部署方案](./cicd-dev-deployment.md) | GitHub Actions + GHCR + SSH + Docker Compose，4C4G 单机部署与回滚 |
 
 ## 约定
 
