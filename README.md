@@ -2,7 +2,14 @@
 
 基于 **Spring Boot 3 + MyBatis-Plus + Apache Shiro + MySQL + Redis** 的后端基础项目。
 
-内置 JWT 登录、Redis token 管理、Shiro 注解鉴权、用户 CRUD、分页、统一返回与全局异常处理。
+内置 JWT 登录、Redis token 管理、Shiro 注解鉴权、手机号验证码登录、用户 CRUD、分页、统一返回与全局异常处理。
+
+## 设计文档
+
+完整方案文档统一放在 [`docs/`](docs/README.md) 目录：
+
+- [手机号验证码登录方案](docs/sms-login-design.md)
+- [基础认证与权限设计](docs/auth-design.md)
 
 ## 技术栈
 
