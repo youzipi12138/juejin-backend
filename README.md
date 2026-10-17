@@ -38,8 +38,8 @@ src/main/java/com/juejin
 ├── model/            # dto / vo
 ├── security/         # JWT、Shiro Realm、JwtFilter、TokenStore、密码工具
 └── service/          # 用户与登录业务
-sql/schema.sql        # 建表脚本
-docker-compose.yml    # MySQL + Redis（可选）
+sql/schema.sql        # 手工建表脚本（部署时由 Flyway 自动迁移）
+docker-compose.yml    # 本地 MySQL + Redis（可选）
 ```
 
 ## 快速开始
@@ -57,12 +57,9 @@ docker compose up -d
 - MySQL：`localhost:3306`，数据库 `juejin`，账号 `root / root`
 - Redis：`localhost:6379`，无密码
 
-如果使用本机已有的 MySQL/Redis，请先执行建表脚本，并修改
-`src/main/resources/application.yml` 中的连接配置：
-
-```bash
-mysql -uroot -p < sql/schema.sql
-```
+如果使用本机已有的 MySQL/Redis，修改 `src/main/resources/application.yml`
+中的连接配置即可。表结构由应用启动时的 Flyway 自动创建；`sql/schema.sql`
+仅用于手工初始化。
 
 ### 2. 启动应用
 
@@ -197,8 +194,8 @@ app:
 
 `sys_user` 新增 `phone`（唯一索引），`password`、`salt` 允许为空（手机号用户无密码）。
 
-- 新库：直接使用 `sql/schema.sql`。
-- 已有库：执行一次 `sql/migration/2026-10-17-add-phone.sql`。
+- 新库：应用启动时由 Flyway（`src/main/resources/db/migration/V1__init.sql`）自动建表。
+- 已有库：执行一次 `sql/migration/2026-10-17-add-phone.sql`，再启用 Flyway。
 
 用户被逻辑删除时会释放手机号和用户名唯一键，允许同一手机号重新注册。
 

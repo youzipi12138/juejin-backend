@@ -221,7 +221,7 @@ REDIS_PASSWORD=
 
 JWT_SECRET=至少32字节的随机字符串
 SMS_PEPPER=随机字符串
-SMS_MOCK=false
+SMS_MOCK=true
 SMS_EXPOSE_CODE=false
 ```
 

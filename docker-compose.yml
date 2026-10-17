@@ -11,7 +11,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d:ro
+      # 表结构由应用启动时的 Flyway 迁移创建（src/main/resources/db/migration）
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
