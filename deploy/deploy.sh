@@ -4,7 +4,7 @@ set -euo pipefail
 cd /opt/juejin
 
 TAG="${1:?usage: deploy.sh <tag>}"
-IMAGE="ghcr.io/youzipi12138/juejin-backend:${TAG}"
+IMAGE="ccr.ccs.tencentyun.com/juejin-dev/juejin-backend:${TAG}"
 PREV_TAG="$(cat .current_tag 2>/dev/null || true)"
 
 echo "==> deploying ${IMAGE}"
@@ -34,7 +34,7 @@ docker compose logs --tail=100 app || true
 
 if [ -n "${PREV_TAG}" ]; then
   echo "==> rollback to ${PREV_TAG}"
-  sed -i "s|^APP_IMAGE=.*|APP_IMAGE=ghcr.io/youzipi12138/juejin-backend:${PREV_TAG}|" .env
+  sed -i "s|^APP_IMAGE=.*|APP_IMAGE=ccr.ccs.tencentyun.com/juejin-dev/juejin-backend:${PREV_TAG}|" .env
   docker compose up -d
 fi
 

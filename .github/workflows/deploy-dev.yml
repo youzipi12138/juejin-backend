@@ -7,14 +7,13 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 concurrency:
   group: deploy-dev
   cancel-in-progress: true
 
 env:
-  IMAGE_NAME: ghcr.io/youzipi12138/juejin-backend
+  IMAGE_NAME: ccr.ccs.tencentyun.com/juejin-dev/juejin-backend
 
 jobs:
   build:
@@ -42,9 +41,9 @@ jobs:
 
       - uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
+          registry: ccr.ccs.tencentyun.com
+          username: ${{ secrets.TCR_USERNAME }}
+          password: ${{ secrets.TCR_PASSWORD }}
 
       - uses: docker/build-push-action@v6
         with:
@@ -63,9 +62,9 @@ jobs:
     timeout-minutes: 10
     environment: dev
     env:
-      # 部署期间临时登录 GHCR 拉取私有镜像，任务结束后 logout
-      GHCR_TOKEN: ${{ github.token }}
-      GHCR_USER: ${{ github.actor }}
+      # 部署期间临时登录腾讯云 TCR 拉取私有镜像，任务结束后 logout
+      TCR_USERNAME: ${{ secrets.TCR_USERNAME }}
+      TCR_PASSWORD: ${{ secrets.TCR_PASSWORD }}
       IMAGE_TAG: ${{ needs.build.outputs.tag }}
     steps:
       - name: Deploy over SSH
@@ -76,9 +75,9 @@ jobs:
           key: ${{ secrets.DEV_SSH_KEY }}
           port: 22
           script_stop: true
-          envs: GHCR_TOKEN,GHCR_USER,IMAGE_TAG
+          envs: TCR_USERNAME,TCR_PASSWORD,IMAGE_TAG
           script: |
-            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
+            echo "$TCR_PASSWORD" | docker login ccr.ccs.tencentyun.com -u "$TCR_USERNAME" --password-stdin
             cd /opt/juejin
             ./deploy.sh "$IMAGE_TAG"
-            docker logout ghcr.io || true
+            docker logout ccr.ccs.tencentyun.com || true
