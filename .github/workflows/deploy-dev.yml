@@ -3,6 +3,9 @@ name: Deploy Dev
 on:
   push:
     branches: [dev]
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
   workflow_dispatch:
 
 permissions:

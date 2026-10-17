@@ -4,6 +4,12 @@
 
 内置 JWT 登录、Redis token 管理、Shiro 注解鉴权、手机号验证码登录、用户 CRUD、分页、统一返回与全局异常处理。
 
+## Dev 环境
+
+- 访问地址：http://49.233.89.175
+- 自动部署：push 到 `dev` 分支 → GitHub Actions 校验 → SSH 到 175 服务器本地构建并重启
+- 部署说明：[docs/cicd-dev-deployment.md](docs/cicd-dev-deployment.md)
+
 ## 设计文档
 
 完整方案文档统一放在 [`docs/`](docs/README.md) 目录：
